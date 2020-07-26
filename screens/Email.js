@@ -4,12 +4,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
 import EmailWhite from "../assets/images/EmailWhite.png";
-import { Magic } from "@magic-sdk/react-native";
 // import Web3 from "web3";
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-community/async-storage";
-
-const m = new Magic("pk_test_128736FEB952AFC9"); // ✨
+import { m, Web3 } from '../App';
 
 export default function Email({ navigation }) {
   const [text, setText] = React.useState("");
@@ -21,29 +19,27 @@ export default function Email({ navigation }) {
     console.log("text", text);
     try {
       await m.auth.loginWithMagicLink({ email: text});
-      // const magic = new Magic("pk_test_128736FEB952AFC9", {
-      //   network: "rinkeby", // Supports "rinkeby", "ropsten", "kovan"
-      // });
-      // const web3 = new Web3(magic.rpcProvider); // Or window.web3 = ...
-      // console.log(web3);
-      // // Get user's Ethereum public address
-      // const address = (await web3.eth.getAccounts())[0];
+      
+      const web3 = new Web3(m.rpcProvider); // Or window.web3 = ...
+      console.log(web3);
+      // Get user's Ethereum public address
+      const address = (await web3.eth.getAccounts())[0];
+      console.log("address", address);
 
-      // console.log("address", address);
-
-      // // Get user's balance in ether
-      // const balance = web3.utils.fromWei(
-      //   await web3.eth.getBalance(address) // Balance is in wei
-      // );
+      // Get user's balance in ether
+      const balance = web3.utils.fromWei(
+        await web3.eth.getBalance(address) // Balance is in wei
+      );
       try {
         console.log('setting storgae', text)
         await AsyncStorage.setItem("user_email", text);
+        await AsyncStorage.setItem("user_ethaddress", address);
         navigation.replace("Organization");
       } catch (e) {
         console.log("error", e);
       }
-    } catch {
-      console.log("Error");
+    } catch (e) {
+      console.log("Error", e);
     }
     console.log("Authenticating12");
   };

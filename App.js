@@ -1,3 +1,4 @@
+import './global';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
@@ -26,7 +27,12 @@ import Organization from "./screens/Organization";
 import TokenLink from "./screens/TokenLink";
 import Buy from "./screens/Buy";
 import Choice from "./screens/Choice";
-// import './global';
+import { Magic } from "@magic-sdk/react-native";
+export const Web3 = require('web3');
+
+export const m = new Magic("pk_test_128736FEB952AFC9", {
+  network: "rinkeby", // Supports "rinkeby", "ropsten", "kovan"
+}); // ✨
 
 const Stack = createStackNavigator();
 
