@@ -3,16 +3,67 @@ import { Image, View, StyleSheet, TextInput } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
+// import LinkdropSDK from '@linkdrop/sdk'
+import AsyncStorage from "@react-native-community/async-storage";
+
+
 import Voting from "../assets/images/Voting.png";
 
 export default function TokenLink({ navigation }) {
   const [text, setText] = React.useState("");
 
+  const handleDropLink = async () => {
+    var link = text.replace('https://claim.linkdrop.io/#/', 'https://claim.linkdrop.io/')
+    var url = new URL(link);
+
+    try {
+      AsyncStorage.getItem('user_ethaddress').then((value) => {
+        console.log('value', value)
+        if(value !== null) {
+          navigation.replace("Choice");
+        }
+      })
+    } catch(e) {
+      navigation.replace('Welcome')
+    }
+
+    const weiAmount = url.searchParams.get("weiAmount")
+    const tokenAddress = url.searchParams.get("tokenAddress")
+    const tokenAmount = url.searchParams.get("tokenAmount")
+    const expirationTime = url.searchParams.get("expirationTime")
+    const linkKey = url.searchParams.get("linkKey")
+    const linkdropSignerSignature = url.searchParams.get("linkdropSignerSignature")
+    const receiverAddress = url.searchParams.get("receiverAddress")
+    const campaignId = url.searchParams.get("campaignId")
+
+    // const linkdropSDK = new LinkdropSDK({
+    //   linkdropMasterAddress:'0x6a86aA5D394741b4464C785BD7Bf3D4c4bD87a6E',
+    //   factoryAddress:'0xBa051891B752ecE3670671812486fe8dd34CC1c8',
+    //   сhain:'rinkeby',
+    //   jsonRpcUrl:`https://rinkeby.infura.io`,
+    //   apiHost:`https://rinkeby.linkdrop.io`,
+    //   claimHost:'https://claim.linkdrop.io'
+    // })
+
+    // const txHash = await linkdropSDK.claim({
+    //   weiAmount, // Amount of wei per claim
+    //   tokenAddress, // ERC20 token address
+    //   tokenAmount, // Amount of ERC20 tokens to claim
+    //   expirationTime,
+    //   linkKey, // Link ephemeral key
+    //   linkdropSignerSignature, // Signature of linkdrop signer
+    //   receiverAddress, // Address of receiver
+    //   campaignId
+    // })
+
+    // console.log(txHash)
+  }
+
   return (
     <View style={styles.container}>
       <Image
         source={Voting}
-        style={{ width: 130, height: 130, marginTop: 25 }}
+        style={{ width: 130, height: 130, marginTop: 100 }}
       />
       <Headline
         style={{

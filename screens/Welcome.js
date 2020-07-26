@@ -3,14 +3,41 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Aragon from "../assets/images/aragon.png";
+
 export default function Welcome({ navigation }) {
+
+  React.useEffect(() => {
+    try {
+      AsyncStorage.getItem('user_email').then((value) => {
+        console.log('value', value)
+        if(value !== null) {
+          navigation.replace("Organization");
+        }
+      })
+    } catch(e) {
+      console.log('e', e)
+    }
+
+    try {
+      AsyncStorage.getItem('organization_address').then((value) => {
+        console.log('value', value)
+        if(value !== null) {
+          navigation.replace("Choice");
+        }
+      })
+    } catch(e) {
+      console.log('e', e)
+    }
+  })
+
   return (
     <View style={styles.container}>
       <Image
         source={Aragon}
-        style={{ width: 100, height: 100, marginTop: 100 }}
+        style={{ width: 100, height: 100, marginTop: 150 }}
       />
       <Headline style={{ color: "white", marginTop: 35, fontSize: 30 }}>
         Welcome To Aragon

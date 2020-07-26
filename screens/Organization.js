@@ -4,14 +4,40 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
 import organization from "../assets/images/Organization.png";
+import { connect } from "@aragon/connect";
+import AsyncStorage from "@react-native-community/async-storage";
+
 export default function Organization({ navigation }) {
   const [text, setText] = React.useState("");
+
+  const getOrganization = async () => {
+    const org = await connect(
+      // "0xAFAE8A53Bbb0ef8Ff0768468dE6D34a523458eBB",
+      text,
+      "thegraph",
+      { chainId: 4 }
+    );
+
+    console.log(org);
+
+    // Fetch the apps belonging to this organization
+    const apps = await org.apps();
+    // apps.forEach(console.log);
+
+    try {
+      console.log('setting item')
+      await AsyncStorage.setItem("organization_address", text);
+      navigation.replace("TokenLink");
+    } catch (e) {
+      console.log("error", e);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Image
         source={organization}
-        style={{ width: 140, height: 130, marginTop: 100 }}
+        style={{ width: 140, height: 130, marginTop: 150 }}
       />
       <Headline style={{ color: "white", marginTop: 35, fontSize: 30 }}>
         Enter Organization ID
@@ -35,8 +61,8 @@ export default function Organization({ navigation }) {
       <Button
         mode="contained"
         style={{ marginTop: 50, backgroundColor: "#0099ff" }}
-        onPress={() => console.log("Pressed")}
-        onPress={() => navigation.push("TokenLink")}
+        onPress={() => getOrganization()}
+        // onPress={() => navigation.push("TokenLink")}
       >
         Open Organization
       </Button>

@@ -19,7 +19,7 @@ export default function Choice({ navigation }) {
       <Headline
         style={{
           color: "white",
-          marginTop: 20,
+          marginTop: 75,
           fontSize: 20,
           textAlign: "center",
         }}
@@ -37,12 +37,11 @@ export default function Choice({ navigation }) {
           style={{
             width: 130,
             height: 130,
-            textAlign: "center",
             marginLeft: 70,
           }}
         />
 
-        <Title style={{ marginTop: 20, marginLeft: 20 }}> Voting</Title>
+        <Title style={{ marginTop: 20, marginLeft: 20 }}>Voting</Title>
         <Paragraph style={{ marginLeft: 20, marginBottom: 20 }}>
           Start voting to Proposals
         </Paragraph>
@@ -53,14 +52,13 @@ export default function Choice({ navigation }) {
           style={{
             width: 130,
             height: 130,
-            textAlign: "center",
             marginLeft: 70,
           }}
         />
 
-        <Title style={{ marginTop: 20, marginLeft: 20 }}> Voting</Title>
+        <Title style={{ marginTop: 20, marginLeft: 20 }}>Tokens</Title>
         <Paragraph style={{ marginLeft: 20, marginBottom: 20 }}>
-          Start voting to Proposals
+          Manage Tokens for DAO
         </Paragraph>
       </Card>
     </View>

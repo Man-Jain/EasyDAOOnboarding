@@ -26,6 +26,8 @@ import Organization from "./screens/Organization";
 import TokenLink from "./screens/TokenLink";
 import Buy from "./screens/Buy";
 import Choice from "./screens/Choice";
+// import './global';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -33,12 +35,11 @@ export default function App() {
     <View style={styles.container}>
       <PaperProvider>
         <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={{headerShown:false}}>
             {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
 
             <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="Email" component={Email} />
-            <Stack.Screen name="EmailLink" component={EmailLink} />
             <Stack.Screen name="Organization" component={Organization} />
             <Stack.Screen name="TokenLink" component={TokenLink} />
             <Stack.Screen name="Buy" component={Buy} />
