@@ -26,6 +26,9 @@ import Organization from "./screens/Organization";
 import TokenLink from "./screens/TokenLink";
 import Buy from "./screens/Buy";
 import Choice from "./screens/Choice";
+import Voting from "./screens/Voting";
+import Account from "./screens/Account";
+import HomeRoute from "./screens/Choice";
 // import './global';
 
 const Stack = createStackNavigator();
@@ -35,7 +38,7 @@ export default function App() {
     <View style={styles.container}>
       <PaperProvider>
         <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator screenOptions={{headerShown:false}}>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
             {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
 
             <Stack.Screen name="Welcome" component={Welcome} />
@@ -44,6 +47,9 @@ export default function App() {
             <Stack.Screen name="TokenLink" component={TokenLink} />
             <Stack.Screen name="Buy" component={Buy} />
             <Stack.Screen name="Choice" component={Choice} />
+            <Stack.Screen name="Voting" component={Voting} />
+            <Stack.Screen name="Account" component={Account} />
+            <Stack.Screen name="Home" component={HomeRoute} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

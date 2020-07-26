@@ -20,7 +20,7 @@ export default function Email({ navigation }) {
     console.log("Authenticating");
     console.log("text", text);
     try {
-      await m.auth.loginWithMagicLink({ email: text});
+      await m.auth.loginWithMagicLink({ email: text });
       // const magic = new Magic("pk_test_128736FEB952AFC9", {
       //   network: "rinkeby", // Supports "rinkeby", "ropsten", "kovan"
       // });
@@ -36,7 +36,7 @@ export default function Email({ navigation }) {
       //   await web3.eth.getBalance(address) // Balance is in wei
       // );
       try {
-        console.log('setting storgae', text)
+        console.log("setting storgae", text);
         await AsyncStorage.setItem("user_email", text);
         navigation.replace("Organization");
       } catch (e) {
@@ -51,7 +51,7 @@ export default function Email({ navigation }) {
   return (
     <View style={styles.container}>
       <m.Relayer />
-      <View>
+      <View style={styles.container}>
         <Image
           source={EmailWhite}
           style={{ width: 100, height: 130, marginTop: 125 }}

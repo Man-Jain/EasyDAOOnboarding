@@ -9,11 +9,16 @@ import {
   Button,
   Card,
   Title,
+  BottomNavigation,
+  Text,
+  List,
 } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
+
 import Voting1 from "../assets/images/Voting1.png";
 import Tokens from "../assets/images/Tokens.png";
 
-export default function Choice({ navigation }) {
+export function HomeRoute({ navigation }) {
   return (
     <View style={styles.container}>
       <Headline
@@ -31,7 +36,10 @@ export default function Choice({ navigation }) {
       >
         What would you like to do?
       </Subheading>
-      <Card style={{ width: 260, alignContent: "center", marginTop: 20 }}>
+      <Card
+        style={{ width: 260, alignContent: "center", marginTop: 20 }}
+        onPress={() => navigation.push("Voting")}
+      >
         <Image
           source={Voting1}
           style={{
@@ -64,11 +72,87 @@ export default function Choice({ navigation }) {
     </View>
   );
 }
+
+const AccountRoute = () => (
+  <View style={styles.container}>
+    <Headline
+      style={{
+        color: "white",
+        marginTop: 15,
+        fontSize: 20,
+        textAlign: "center",
+      }}
+    >
+      Manage Account
+    </Headline>
+    <Headline
+      style={{
+        color: "white",
+        marginTop: 15,
+        fontSize: 20,
+        textAlign: "center",
+      }}
+    >
+      200$
+    </Headline>
+    <Subheading style={{ marginTop: 15, color: "white", textAlign: "center" }}>
+      0xAF...58eBB
+    </Subheading>
+
+    <List.Item
+      style={{ color: "white" }}
+      title=" Ether 0.5 ETH"
+      left={(props) => <List.Icon {...props} icon="ethereum" />}
+    />
+    <List.Item
+      title="Token 0.5 TKN"
+      left={(props) => <List.Icon {...props} icon="folder" />}
+    />
+    <List.Item
+      title="Manage Wallet"
+      right={(props) => <List.Icon {...props} icon="arrow-right" />}
+    />
+    <List.Item
+      title="Manage Organizations"
+      right={(props) => <List.Icon {...props} icon="arrow-right" />}
+    />
+    <List.Item
+      title="Redeem Linkdrop"
+      right={(props) => <List.Icon {...props} icon="arrow-right" />}
+    />
+    <List.Item
+      title="Buy Crypto"
+      right={(props) => <List.Icon {...props} icon="arrow-right" />}
+    />
+  </View>
+);
+
+export default function Choice() {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: "home", title: "Home", icon: "home" },
+    { key: "account", title: "Account", icon: "account" },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    home: HomeRoute,
+    account: AccountRoute,
+  });
+
+  return (
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+    />
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgb(40, 51, 76)",
     alignItems: "center",
+    color: "white",
   },
   contentContainer: {
     paddingTop: 15,
