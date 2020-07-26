@@ -1,17 +1,32 @@
 import * as React from "react";
-import { Image, View, StyleSheet, TextInput } from "react-native";
+import {
+  Image,
+  View,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
-import LinkdropSDK from '@linkdrop/sdk'
+import LinkdropSDK from "@linkdrop/sdk";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import Voting from "../assets/images/Voting.png";
 
 export default function TokenLink({ navigation }) {
   const [text, setText] = React.useState("");
+  const [showLoader, setShowLoader] = React.useState(false);
+  const [claimStatus, setClaimStatus] = React.useState(false);
 
   const handleDropLink = async () => {
+    setShowLoader(true);
+    if (!text) {
+      Alert.alert(
+        "Organization Not Entered",
+        "Please Enter Organization ID or Address Into The Field"
+      );
+    }
     var link = text.replace(
       "https://claim.linkdrop.io/#/",
       "https://claim.linkdrop.io/"
@@ -60,14 +75,24 @@ export default function TokenLink({ navigation }) {
             navigation.replace("Buy");
           })
           .catch((error) => {
+            Alert.alert(
+              "Error! Cannot Claim Tokens",
+              "There was some error in claiming tokens"
+            );
             console.log("error", error);
           });
 
         console.log(txHash);
       });
     } catch (e) {
-      navigation.replace("Welcome");
+      console.log("error", e);
+      Alert.alert(
+        "Error! Cannot Claim Tokens",
+        "There was some error in claiming tokens"
+      );
     }
+    setShowLoader(false);
+    setClaimStatus(true);
   };
 
   return (
@@ -107,16 +132,45 @@ export default function TokenLink({ navigation }) {
         value={text}
         onChangeText={(text) => setText(text)}
       />
+      {showLoader ? (
+        <ActivityIndicator style={{ marginTop: 50 }} />
+      ) : claimStatus ? (
+        <View style={{ marginTop: 50 }}>
+          <Headline style={{ color: "white", fontSize: 15 }}>
+            Your Tokens Have Been Claimed Successfully
+          </Headline>
+          <Button
+            mode="contained"
+            style={{ marginTop: 15, backgroundColor: "#0099ff" }}
+            onPress={() => navigation.push("TokenLink")}
+            icon={{
+              uri: "https://image.flaticon.com/icons/png/512/61/61222.png",
+            }}
+          >
+            Next
+          </Button>
+        </View>
+      ) : (
+        <Button
+          mode="contained"
+          style={{ marginTop: 50, backgroundColor: "#0099ff" }}
+          onPress={handleDropLink}
+          icon={{
+            uri:
+              "https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/3563915481595156041-512.png",
+          }}
+        >
+          Claim Tokens{" "}
+        </Button>
+      )}
       <Button
-        mode="contained"
-        style={{ marginTop: 50, backgroundColor: "#0099ff" }}
-        onPress={handleDropLink}
+        mode="text"
+        style={{ marginTop: 45, color: "white" }}
+        onPress={() => navigation.push("Buy")}
+        color="white"
       >
-        Claim Tokens{" "}
-      </Button>
-      <Subheading style={{ marginTop: 45, color: "white" }}>
         Skip if you have no such link
-      </Subheading>
+      </Button>
     </View>
   );
 }

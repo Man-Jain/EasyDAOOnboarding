@@ -4,12 +4,28 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
 import Eth from "../assets/images/Eth.png";
+import { WebView } from "react-native-webview";
+import AsyncStorage from "@react-native-community/async-storage";
+
 
 export default function Buy({ navigation }) {
   const [text, setText] = React.useState("");
+  const [userAddress, setUserAddress] = React.useState("")
+
+  React.useEffect(() => {
+    try {
+      AsyncStorage.getItem('user_ethaddress').then((value) => {
+        console.log('value', e)
+        setUserAddress(value)
+      })
+    } catch(e) {
+      console.log('e', e)
+    }
+  })
+
   return (
     <View style={styles.container}>
-      <Image source={Eth} style={{ width: 180, height: 200, marginTop: 2 }} />
+      <Image source={Eth} style={{ width: 250, height: 250, marginTop: 25 }} />
       <Headline
         style={{
           color: "white",
@@ -23,44 +39,32 @@ export default function Buy({ navigation }) {
       <Subheading
         style={{ marginTop: 15, color: "white", textAlign: "center" }}
       >
-        This would be required for performing actions like Voting, Token
-        management etc.
+        ETH is needed for performing actions like Voting, Token Management and for performing other 
+        DAO operations.
       </Subheading>
       <Subheading
         style={{ marginTop: 10, color: "white", textAlign: "center" }}
       >
-        You can skip this step for now and do it later
+        If you'd like you can skip this step for now and do it later
       </Subheading>
-      <TextInput
-        style={{
-          marginTop: 45,
-          fontSize: 17,
-          backgroundColor: "white",
-          height: 30,
-          width: 200,
-          borderRadius: 30,
-          alignContent: "center",
-          textAlign: "center",
-        }}
-        placeholder="Enter Amount to Buy"
-        label="Email"
-        value={text}
-        onChangeText={(text) => setText(text)}
-      />
       <Button
-        mode="contained"
-        style={{ marginTop: 50, backgroundColor: "#0099ff" }}
+        mode="outlined"
+        style={{ marginTop: 50, borderColor: "white" }}
         onPress={() => console.log("Pressed")}
-        onPress={() => navigation.push("Choice")}
+        onPress={() => navigation.push("TransaktScreen")}
+        color="white"
       >
-        Open Organization
+        Buy Now
       </Button>
-      <Subheading
-        style={{ marginTop: 45, color: "white" }}
-        onPress={() => navigation.push("Choice")}
+      <Button
+        mode="outlined"
+        style={{ marginTop: 20, borderColor: "white" }}
+        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.push("OrgApps")}
+        color="white"
       >
-        Skip Step for Now
-      </Subheading>
+        Go To Organization
+      </Button>
     </View>
   );
 }

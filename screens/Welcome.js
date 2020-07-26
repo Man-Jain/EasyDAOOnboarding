@@ -8,30 +8,29 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Aragon from "../assets/images/aragon.png";
 
 export default function Welcome({ navigation }) {
-
   React.useEffect(() => {
     try {
-      AsyncStorage.getItem('user_email').then((value) => {
-        console.log('value', value)
-        if(value !== null) {
-          navigation.replace("Organization");
+      AsyncStorage.getItem("organization_address").then((value) => {
+        console.log("value", value);
+        if (value !== null) {
+          navigation.replace("OrgApps");
+        } else {
+          try {
+            AsyncStorage.getItem("user_email").then((value) => {
+              console.log("value", value);
+              if (value !== null) {
+                navigation.replace("Organization");
+              }
+            });
+          } catch (e) {
+            console.log("e", e);
+          }
         }
-      })
-    } catch(e) {
-      console.log('e', e)
+      });
+    } catch (e) {
+      console.log("e", e);
     }
-
-    try {
-      AsyncStorage.getItem('organization_address').then((value) => {
-        console.log('value', value)
-        if(value !== null) {
-          navigation.replace("Choice");
-        }
-      })
-    } catch(e) {
-      console.log('e', e)
-    }
-  })
+  });
 
   return (
     <View style={styles.container}>

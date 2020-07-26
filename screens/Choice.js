@@ -12,8 +12,21 @@ import {
 } from "react-native-paper";
 import Voting1 from "../assets/images/Voting1.png";
 import Tokens from "../assets/images/Tokens.png";
+import { Organization, connect } from "@aragon/connect";
+import { WebView } from "react-native-webview";
 
 export default function Choice({ navigation }) {
+  React.useEffect(() => {
+    // const org = await connect(
+    //   "0xAFAE8A53Bbb0ef8Ff0768468dE6D34a523458eBB",
+    //   "thegraph",
+    //   { chainId: 4 }
+    // );
+    // const orgn = org.app()
+    // console.log(orgn.appName);
+    // console.log(Organization)
+  });
+
   return (
     <View style={styles.container}>
       <Headline
@@ -61,6 +74,14 @@ export default function Choice({ navigation }) {
           Manage Tokens for DAO
         </Paragraph>
       </Card>
+      <Button
+        mode="contained"
+        style={{ marginTop: 50, backgroundColor: "#0099ff" }}
+        onPress={() => console.log("Pressed")}
+        onPress={() => navigation.push("Organization")}
+      >
+        Buy Now
+      </Button>
     </View>
   );
 }

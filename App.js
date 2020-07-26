@@ -22,11 +22,11 @@ import LinkingConfiguration from "./navigation/LinkingConfiguration";
 
 import Welcome from "./screens/Welcome";
 import Email from "./screens/Email";
-import EmailLink from "./screens/EmailLink";
 import Organization from "./screens/Organization";
 import TokenLink from "./screens/TokenLink";
 import Buy from "./screens/Buy";
-import Choice from "./screens/Choice";
+import OrgApps from "./screens/OrgApps";
+import TransaktScreen from './screens/TransaktScreen';
 import { Magic } from "@magic-sdk/react-native";
 export const Web3 = require('web3');
 
@@ -41,15 +41,16 @@ export default function App() {
     <View style={styles.container}>
       <PaperProvider>
         <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator screenOptions={{headerShown:false}}>
+          <Stack.Navigator>
             {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
 
-            <Stack.Screen name="Welcome" component={Welcome} />
-            <Stack.Screen name="Email" component={Email} />
-            <Stack.Screen name="Organization" component={Organization} />
-            <Stack.Screen name="TokenLink" component={TokenLink} />
-            <Stack.Screen name="Buy" component={Buy} />
-            <Stack.Screen name="Choice" component={Choice} />
+            <Stack.Screen options={{ headerShown: false }} name="Welcome" component={Welcome} />
+            <Stack.Screen options={{ headerShown: false }} name="Email" component={Email} />
+            <Stack.Screen options={{ headerShown: false }} name="Organization" component={Organization} />
+            <Stack.Screen options={{ headerShown: false }} name="TokenLink" component={TokenLink} />
+            <Stack.Screen options={{ headerShown: false }} name="Buy" component={Buy} />
+            <Stack.Screen options={{ headerShown: false }} name="OrgApps" component={OrgApps} />
+            <Stack.Screen screenOptions={{headerShown: true, headerTitle: 'Buy Crypto'}} name="TransaktScreen" component={TransaktScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

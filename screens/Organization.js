@@ -1,5 +1,13 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
@@ -9,27 +17,37 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 export default function Organization({ navigation }) {
   const [text, setText] = React.useState("");
+  const [showLoader, setShowLoader] = React.useState(false);
+  const [orgStatus, setOrgStatus] = React.useState(false);
 
   const getOrganization = async () => {
-    const org = await connect(
-      // "0xAFAE8A53Bbb0ef8Ff0768468dE6D34a523458eBB",
-      text,
-      "thegraph",
-      { chainId: 4 }
-    );
-
-    console.log(org);
-
-    // Fetch the apps belonging to this organization
-    const apps = await org.apps();
-    // apps.forEach(console.log);
+    setShowLoader(true);
+    if (!text) {
+      Alert.alert(
+        "Organization Not Entered",
+        "Please Enter Organization ID or Address Into The Field"
+      );
+    }
 
     try {
-      console.log('setting item')
+      const org = await connect(
+        // "0xAFAE8A53Bbb0ef8Ff0768468dE6D34a523458eBB",
+        text,
+        "thegraph",
+        { chainId: 4 }
+      );
+
+      console.log(org);
+
       await AsyncStorage.setItem("organization_address", text);
-      navigation.replace("TokenLink");
+      setShowLoader(false);
+      setOrgStatus(true);
     } catch (e) {
-      console.log("error", e);
+      setShowLoader(false);
+      Alert.alert(
+        "Error Fetching Organization",
+        "Make Sure You Have Entered The Correct Organization Info"
+      );
     }
   };
 
@@ -58,14 +76,37 @@ export default function Organization({ navigation }) {
         value={text}
         onChangeText={(text) => setText(text)}
       />
-      <Button
-        mode="contained"
-        style={{ marginTop: 50, backgroundColor: "#0099ff" }}
-        onPress={() => getOrganization()}
-        // onPress={() => navigation.push("TokenLink")}
-      >
-        Open Organization
-      </Button>
+      {showLoader ? (
+        <ActivityIndicator style={{ marginTop: 50 }} />
+      ) : orgStatus ? (
+        <View style={{ marginTop: 50 }}>
+          <Headline style={{ color: "white", fontSize: 15 }}>
+            Organization Found
+          </Headline>
+          <Button
+            mode="contained"
+            style={{ marginTop: 15, backgroundColor: "#0099ff" }}
+            onPress={() => navigation.push("TokenLink")}
+            icon={{
+              uri: "https://image.flaticon.com/icons/png/512/61/61222.png",
+            }}
+          >
+            Next
+          </Button>
+        </View>
+      ) : (
+        <Button
+          mode="contained"
+          style={{ marginTop: 50, backgroundColor: "#0099ff" }}
+          onPress={() => getOrganization()}
+          icon={{
+            uri:
+              "https://www.seekpng.com/png/full/793-7936273_how-to-create-css-search-box-form-design.png",
+          }}
+        >
+          Open Organization
+        </Button>
+      )}
     </View>
   );
 }

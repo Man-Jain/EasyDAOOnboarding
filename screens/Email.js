@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Image, View, StyleSheet, TextInput } from "react-native";
+import {
+  Image,
+  View,
+  StyleSheet,
+  TextInput,
+  ActivityIndicator,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
@@ -7,19 +13,20 @@ import EmailWhite from "../assets/images/EmailWhite.png";
 // import Web3 from "web3";
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-community/async-storage";
-import { m, Web3 } from '../App';
+import { m, Web3 } from "../App";
 
 export default function Email({ navigation }) {
   const [text, setText] = React.useState("");
   const [showMagic, setShowMagic] = React.useState(true);
+  const [showLoader, setShowLoader] = React.useState(false);
 
   const showLink = async () => {
     console.log("Clicked");
     console.log("Authenticating");
     console.log("text", text);
     try {
-      await m.auth.loginWithMagicLink({ email: text});
-      
+      await m.auth.loginWithMagicLink({ email: text });
+      setShowLoader(true);
       const web3 = new Web3(m.rpcProvider); // Or window.web3 = ...
       console.log(web3);
       // Get user's Ethereum public address
@@ -31,7 +38,7 @@ export default function Email({ navigation }) {
         await web3.eth.getBalance(address) // Balance is in wei
       );
       try {
-        console.log('setting storgae', text)
+        console.log("setting storgae", text);
         await AsyncStorage.setItem("user_email", text);
         await AsyncStorage.setItem("user_ethaddress", address);
         navigation.replace("Organization");
@@ -70,15 +77,20 @@ export default function Email({ navigation }) {
           value={text}
           onChangeText={(text) => setText(text)}
         />
-        <Button
-          mode="contained"
-          style={{ marginTop: 50, backgroundColor: "#0099ff", width: 120 }}
-          onPress={() => setShowMagic(false)}
-          onPress={showLink}
-          // onPress={() => navigation.push("EmailLink")}
-        >
-          Send Link
-        </Button>
+        {showLoader ? (
+          <ActivityIndicator />
+        ) : (
+          <Button
+            mode="contained"
+            style={{ marginTop: 50, backgroundColor: "#0099ff", width: 120 }}
+            onPress={() => setShowMagic(false)}
+            onPress={showLink}
+            // onPress={() => navigation.push("EmailLink")}
+          >
+            Send Link
+          </Button>
+        )}
+
         <Subheading style={{ marginTop: 45, color: "white" }}>
           Already have a Etherum account?
         </Subheading>
