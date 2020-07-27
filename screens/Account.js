@@ -17,7 +17,103 @@ import {
 } from "react-native-paper";
 import Wallet from "ethereumjs-wallet";
 import wallet from "../assets/images/wallet.png";
+import AsyncStorage from "@react-native-community/async-storage";
+
 export default function Account({ navigation }) {
+  const [ethPrice, setETHPrice] = React.useState(1);
+  const [userBalance, setUserBalance] = React.useState(1);
+  const [userAddress, setUserAddress] = React.useState("0x00");
+  const [tokenAddressBalance, setTokenBalance] = React.useState(1);
+  const [tokenDetails, setTokenDetails] = React.useState({tokenSymbol: "TKN", tokenName: "TOKEN"});
+
+  const getShortAddress = (longAddress) => {
+    const shortUserAddress =
+      longAddress.substring(0, 7) +
+      "..." +
+      longAddress.substring(longAddress.length - 7, longAddress.length);
+
+    return shortUserAddress;
+  };
+
+  const fetchETHPrice = () => {
+    const url =
+      "https://api.etherscan.io/api?module=stats&action=ethprice&apikey=58VFC5W127JKU27R1S338C9I4QFGHIIWN1";
+    fetch(url)
+      .then((response) => response.json())
+      .then((json) => {
+        setETHPrice(json.result.ethusd);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const getUserBalance = async () => {
+    try {
+      const address = await AsyncStorage.getItem("user_ethaddress");
+      setUserAddress(address);
+      console.log(address);
+      const url = `https://api-rinkeby.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=58VFC5W127JKU27R1S338C9I4QFGHIIWN1`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.result === 0) {
+            setUserBalance(0);
+          }
+          setUserBalance(json.result / 10 ** 18);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getTokenBalance = async () => {
+    try {
+      const tokenAddress = await AsyncStorage.getItem(
+        "organization_token_address"
+      );
+      const address = await AsyncStorage.getItem("user_ethaddress");
+      console.log(tokenAddress);
+      const url = `https://api-rinkeby.etherscan.io/api?module=account&action=tokenbalance&contractaddress=${tokenAddress}&address=${address}&tag=latest&apikey=58VFC5W127JKU27R1S338C9I4QFGHIIWN1`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.result === 0) {
+            set(0);
+          }
+          setTokenBalance(json.result / 10 ** 18);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      const url2 = `https://api-rinkeby.etherscan.io/api?module=account&action=tokentx&contractaddress=${tokenAddress}&address=${address}&page=1&offset=0&sort=asc&apikey=58VFC5W127JKU27R1S338C9I4QFGHIIWN1`;
+      fetch(url2)
+        .then((response) => response.json())
+        .then((json) => {
+          const tokenD = {
+            tokenSymbol: json.result[0].tokenSymbol,
+            tokenName: json.result[0].tokenName,
+          };
+          setTokenDetails(tokenD);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchETHPrice();
+    getUserBalance();
+    getTokenBalance();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Headline
@@ -34,20 +130,20 @@ export default function Account({ navigation }) {
         style={{
           color: "white",
           marginTop: 15,
-          fontSize: 20,
+          fontSize: 30,
           textAlign: "center",
         }}
       >
-        200$
+        {Math.round(ethPrice * userBalance * 100) / 100} $
       </Headline>
       <Subheading style={{ marginTop: 5, color: "white", textAlign: "center" }}>
-        0xAF...58eBB
+        {getShortAddress(userAddress)}
       </Subheading>
       <View style={styles.container}>
         <List.Section>
           <List.Item
             titleStyle={{ color: "white" }}
-            title="Ethereum   0.5 ETH"
+            title={`Ethereum - ${userBalance} ETH`}
             left={() => (
               <List.Icon
                 icon={({ size, color }) => (
@@ -60,7 +156,9 @@ export default function Account({ navigation }) {
             )}
           />
           <List.Item
-            title="Token   0.5 TKN"
+            title={`${tokenDetails.tokenName} - ${tokenAddressBalance} ${""} ${
+              tokenDetails.tokenSymbol
+            }`}
             titleStyle={{ color: "white" }}
             left={() => (
               <List.Icon
@@ -90,6 +188,7 @@ export default function Account({ navigation }) {
                 )}
               />
             )}
+            onPress={() => navigation.push("Buy")}
           />
           <List.Item
             title="Manage Organization"
@@ -105,6 +204,7 @@ export default function Account({ navigation }) {
                 )}
               />
             )}
+            onPress={() => navigation.push("Organization")}
           />
           <List.Item
             title="Redeem Linkdrop"
@@ -120,6 +220,7 @@ export default function Account({ navigation }) {
                 )}
               />
             )}
+            onPress={() => navigation.push("TokenLink")}
           />
           <List.Item
             title="Buy Crypto"
@@ -135,6 +236,7 @@ export default function Account({ navigation }) {
                 )}
               />
             )}
+            onPress={() => navigation.push("TransaktScreen")}
           />
         </List.Section>
       </View>

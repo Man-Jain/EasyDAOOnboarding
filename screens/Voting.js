@@ -18,6 +18,15 @@ import { Voting } from "@aragon/connect-thegraph-voting";
 export default function Choice({ navigation, route }) {
   const [votes, setVotes] = React.useState([]);
 
+  const getProgress = (votes) => {
+    if(votes === 0) {
+      return 0
+    }
+    else {
+      return votes / 10 ** 18
+    }
+  }
+
   const fetchVotes = () => {
     const { address } = route.params;
     console.log("address", address);
@@ -45,17 +54,7 @@ export default function Choice({ navigation, route }) {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Headline
-          style={{
-            color: "white",
-            marginTop: 15,
-            fontSize: 20,
-            textAlign: "center",
-          }}
-        >
-          Voting{" "}
-        </Headline>
-        {votes.length < 0 ? (
+        {votes.length === 0 ? (
           <ActivityIndicator />
         ) : (
           votes.map((vote, key) => (
@@ -67,6 +66,7 @@ export default function Choice({ navigation, route }) {
                 marginBottom: 20,
                 backgroundColor: "#404e6e",
               }}
+              key={key}
             >
               <Button
                 icon="thumb-up"
@@ -97,7 +97,7 @@ export default function Choice({ navigation, route }) {
                 Yes{"  - "} {vote.yea / 10 ** 18}
               </Headline>
               <ProgressBar
-                progress={0.2}
+                progress={getProgress(vote.yea)}
                 color={Colors.blue400}
                 style={{ marginLeft: 10, marginRight: 10 }}
               />
@@ -112,7 +112,7 @@ export default function Choice({ navigation, route }) {
                 No{" - "} {vote.nay / 10 ** 18}
               </Headline>
               <ProgressBar
-                progress={0.5}
+                progress={getProgress(vote.nay)}
                 color={Colors.blue400}
                 style={{ marginLeft: 10, marginRight: 10 }}
               />

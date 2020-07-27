@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, View, StyleSheet, ActivityIndicator } from "react-native";
+import { Image, View, StyleSheet, ActivityIndicator, TextInput } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -7,7 +7,6 @@ import {
   Subheading,
   Paragraph,
   Button,
-  TextInput,
 } from "react-native-paper";
 import EmailWhite from "../assets/images/EmailWhite.png";
 // import Web3 from "web3";
@@ -69,14 +68,10 @@ export default function Email({ navigation }) {
             backgroundColor: "white",
             height: 50,
             borderRadius: 10,
-            borderBottomColor: "white",
-            borderColor: "white",
             alignContent: "center",
-            borderTopLeftRadius: 10,
-            borderTopRightRadius: 10,
+            padding: 10
           }}
-          label="Email"
-          type="outlined"
+          placeholder="Email ID"
           value={text}
           onChangeText={(text) => setText(text)}
         />
@@ -86,7 +81,7 @@ export default function Email({ navigation }) {
         ) : (
           <Button
             mode="contained"
-            style={{ marginTop: 50, backgroundColor: "#0099ff", width: 120 }}
+            style={{ marginTop: 50, backgroundColor: "#0099ff", width: 125 }}
             onPress={() => setShowMagic(false)}
             onPress={showLink}
             // onPress={() => navigation.push("EmailLink")}

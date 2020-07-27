@@ -36,7 +36,7 @@ export const m = new Magic("pk_test_128736FEB952AFC9", {
 }); // ✨
 
 const Stack = createStackNavigator();
-
+console.disableYellowBox = true;
 export default function App() {
   return (
     <View style={styles.container}>

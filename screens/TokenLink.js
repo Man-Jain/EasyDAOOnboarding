@@ -1,14 +1,14 @@
 import * as React from "react";
-import { Image, View, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  Image,
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  TextInput,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  Headline,
-  Subheading,
-  Paragraph,
-  Button,
-  TextInput,
-} from "react-native-paper";
+import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
 import LinkdropSDK from "@linkdrop/sdk";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -70,9 +70,16 @@ export default function TokenLink({ navigation }) {
             receiverAddress, // Address of receiver
             campaignId,
           })
-          .then((resp) => {
+          .then(async (resp) => {
             console.log("resp", resp);
-            navigation.replace("Buy");
+            try {
+              await AsyncStorage.setItem(
+                "organization_token_address",
+                tokenAddress
+              );
+            } catch (e) {
+              console.log(e);
+            }
           })
           .catch((error) => {
             Alert.alert(
@@ -109,7 +116,7 @@ export default function TokenLink({ navigation }) {
           textAlign: "center",
         }}
       >
-        Enter Your Voting Token Link
+        Enter Your DAO Token Link
       </Headline>
       <Subheading
         style={{ marginTop: 15, color: "white", textAlign: "center" }}
@@ -123,29 +130,24 @@ export default function TokenLink({ navigation }) {
           backgroundColor: "white",
           height: 50,
           borderRadius: 10,
-          borderBottomColor: "white",
-          borderColor: "white",
           alignContent: "center",
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
+          padding: 10,
         }}
         placeholder="Enter Tokens Link"
-        label="Email"
-        type="outlined"
         value={text}
         onChangeText={(text) => setText(text)}
       />
       {showLoader ? (
         <ActivityIndicator style={{ marginTop: 50 }} />
       ) : claimStatus ? (
-        <View style={{ marginTop: 50 }}>
+        <View style={{ marginTop: 35 }}>
           <Headline style={{ color: "white", fontSize: 15 }}>
-            Your Tokens Have Been Claimed Successfully
+            Tokens Claimed
           </Headline>
           <Button
             mode="contained"
             style={{ marginTop: 15, backgroundColor: "#0099ff" }}
-            onPress={() => navigation.push("TokenLink")}
+            onPress={() => navigation.push("Buy")}
             icon={{
               uri: "https://image.flaticon.com/icons/png/512/61/61222.png",
             }}
@@ -168,7 +170,7 @@ export default function TokenLink({ navigation }) {
       )}
       <Button
         mode="text"
-        style={{ marginTop: 45, color: "white" }}
+        style={{ marginTop: 30, color: "white" }}
         onPress={() => navigation.push("Buy")}
         color="white"
       >

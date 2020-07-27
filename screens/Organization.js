@@ -6,6 +6,7 @@ import {
   Image,
   Alert,
   ActivityIndicator,
+  TextInput
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,7 +15,6 @@ import {
   Subheading,
   Paragraph,
   Button,
-  TextInput,
 } from "react-native-paper";
 import organization from "../assets/images/Organization.png";
 import { connect } from "@aragon/connect";
@@ -72,15 +72,10 @@ export default function Organization({ navigation }) {
           backgroundColor: "white",
           height: 50,
           borderRadius: 10,
-          borderBottomColor: "white",
-          borderColor: "white",
           alignContent: "center",
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
+          padding: 10
         }}
         placeholder="Organization ID or Address"
-        label="Email"
-        type="outlined"
         value={text}
         onChangeText={(text) => setText(text)}
       />

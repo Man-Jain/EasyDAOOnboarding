@@ -11,8 +11,12 @@ import {
   Title,
   ActivityIndicator,
 } from "react-native-paper";
-import Voting1 from "../assets/images/Voting1.png";
-import Tokens from "../assets/images/Tokens.png";
+
+import FINANCE from "../assets/images/FINANCE.png";
+import TOKEN from "../assets/images/TOKEN.png";
+import VOTING from "../assets/images/VOTING.png";
+import VAULT from "../assets/images/VAULT.png";
+
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-community/async-storage";
 import { connect } from "@aragon/connect";
@@ -39,8 +43,14 @@ export default function OrgApps({ navigation }) {
           { chainId: 4 }
         );
         console.log("Orggg", org);
-        const apps = await org.apps();
+        let apps = await org.apps();
         console.log(apps);
+        const votingapp = apps.find((app) => app.name === "voting");
+        const votingappIndex = apps.findIndex((app) => app.name === "voting");
+        const backupApp = apps[0];
+        apps[0] = votingapp;
+        apps.push(backupApp);
+        apps.splice(votingappIndex, 1)
         setOrgApps(apps);
       });
     } catch (e) {
@@ -54,7 +64,7 @@ export default function OrgApps({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {orgApps.length < 0 ? (
+      {orgApps.length === 0 ? (
         <ActivityIndicator />
       ) : (
         <ScrollView showsHorizontalScrollIndicator={false}>
@@ -74,7 +84,7 @@ export default function OrgApps({ navigation }) {
             What would you like to do?
           </Subheading>
 
-          {orgApps.map((app) =>
+          {orgApps.map((app, key) =>
             app.name ? (
               <Card
                 onPress={() => {
@@ -89,15 +99,85 @@ export default function OrgApps({ navigation }) {
                   backgroundColor: "#404e6e",
                   color: "white",
                 }}
+                key={key}
               >
-                <Image
-                  source={Voting1}
-                  style={{
-                    width: 130,
-                    height: 130,
-                    marginLeft: 70,
-                  }}
-                />
+                {app.name == "voting" ? (
+                  <Image
+                    source={VOTING}
+                    style={{
+                      width: 130,
+                      height: 130,
+                      marginLeft: 70,
+                      marginTop: 20,
+                    }}
+                  />
+                ) : null}
+                {app.name == "finance" ? (
+                  <View>
+                    <Image
+                      source={FINANCE}
+                      style={{
+                        width: 130,
+                        height: 130,
+                        marginLeft: 70,
+                        marginTop: 20,
+                      }}
+                    />
+                    <Subheading
+                      style={{
+                        marginTop: 15,
+                        color: "white",
+                        textAlign: "center",
+                      }}
+                    >
+                      Not Working Yet
+                    </Subheading>
+                  </View>
+                ) : null}
+                {app.name == "vault" ? (
+                  <View>
+                    <Image
+                      source={VAULT}
+                      style={{
+                        width: 130,
+                        height: 130,
+                        marginLeft: 70,
+                        marginTop: 20,
+                      }}
+                    />
+                    <Subheading
+                      style={{
+                        marginTop: 15,
+                        color: "white",
+                        textAlign: "center",
+                      }}
+                    >
+                      Not Working Yet
+                    </Subheading>
+                  </View>
+                ) : null}
+                {app.name == "token-manager" ? (
+                  <View>
+                    <Image
+                      source={TOKEN}
+                      style={{
+                        width: 130,
+                        height: 130,
+                        marginLeft: 70,
+                        marginTop: 20,
+                      }}
+                    />
+                    <Subheading
+                      style={{
+                        marginTop: 15,
+                        color: "white",
+                        textAlign: "center",
+                      }}
+                    >
+                      Not Working Yet
+                    </Subheading>
+                  </View>
+                ) : null}
 
                 <Title
                   style={{
@@ -117,19 +197,6 @@ export default function OrgApps({ navigation }) {
               </Card>
             ) : null
           )}
-
-          <Button
-            mode="contained"
-            style={{
-              marginTop: 30,
-              backgroundColor: "#0099ff",
-              marginBottom: 10,
-            }}
-            onPress={() => console.log("Pressed")}
-            onPress={() => navigation.push("Buy")}
-          >
-            Buy Now
-          </Button>
         </ScrollView>
       )}
     </View>

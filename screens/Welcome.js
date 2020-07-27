@@ -52,7 +52,7 @@ export default function Welcome({ navigation }) {
           width: 270,
         }}
       >
-        Join a DAO and start participating in just a few clicks
+        Join a DAO and Start Participating in a Few Steps
       </Paragraph>
       <Button
         mode="contained"
