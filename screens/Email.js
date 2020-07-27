@@ -1,14 +1,14 @@
 import * as React from "react";
-import {
-  Image,
-  View,
-  StyleSheet,
-  TextInput,
-  ActivityIndicator,
-} from "react-native";
+import { Image, View, StyleSheet, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
+import {
+  Headline,
+  Subheading,
+  Paragraph,
+  Button,
+  TextInput,
+} from "react-native-paper";
 import EmailWhite from "../assets/images/EmailWhite.png";
 // import Web3 from "web3";
 import { WebView } from "react-native-webview";
@@ -64,21 +64,25 @@ export default function Email({ navigation }) {
         </Headline>
         <TextInput
           style={{
-            marginTop: 45,
-            fontSize: 17,
+            marginTop: 35,
+            width: 300,
             backgroundColor: "white",
-            height: 30,
-            width: 200,
-            borderRadius: 30,
+            height: 50,
+            borderRadius: 10,
+            borderBottomColor: "white",
+            borderColor: "white",
             alignContent: "center",
-            textAlign: "center",
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
           }}
           label="Email"
+          type="outlined"
           value={text}
           onChangeText={(text) => setText(text)}
         />
+
         {showLoader ? (
-          <ActivityIndicator style={{ marginTop: 50}} />
+          <ActivityIndicator style={{ marginTop: 50 }} />
         ) : (
           <Button
             mode="contained"
@@ -98,7 +102,6 @@ export default function Email({ navigation }) {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

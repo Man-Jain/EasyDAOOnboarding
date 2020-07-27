@@ -1,14 +1,14 @@
 import * as React from "react";
-import {
-  Image,
-  View,
-  StyleSheet,
-  TextInput,
-  ActivityIndicator,
-} from "react-native";
+import { Image, View, StyleSheet, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
+import {
+  Headline,
+  Subheading,
+  Paragraph,
+  Button,
+  TextInput,
+} from "react-native-paper";
 import LinkdropSDK from "@linkdrop/sdk";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -118,17 +118,20 @@ export default function TokenLink({ navigation }) {
       </Subheading>
       <TextInput
         style={{
-          marginTop: 45,
-          fontSize: 17,
+          marginTop: 35,
+          width: 300,
           backgroundColor: "white",
-          height: 30,
-          width: 200,
-          borderRadius: 30,
+          height: 50,
+          borderRadius: 10,
+          borderBottomColor: "white",
+          borderColor: "white",
           alignContent: "center",
-          textAlign: "center",
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
         }}
         placeholder="Enter Tokens Link"
         label="Email"
+        type="outlined"
         value={text}
         onChangeText={(text) => setText(text)}
       />

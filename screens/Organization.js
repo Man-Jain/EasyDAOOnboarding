@@ -4,13 +4,18 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput,
   Alert,
   ActivityIndicator,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Headline, Subheading, Paragraph, Button } from "react-native-paper";
+import {
+  Headline,
+  Subheading,
+  Paragraph,
+  Button,
+  TextInput,
+} from "react-native-paper";
 import organization from "../assets/images/Organization.png";
 import { connect } from "@aragon/connect";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -62,20 +67,24 @@ export default function Organization({ navigation }) {
       </Headline>
       <TextInput
         style={{
-          marginTop: 45,
-          fontSize: 12,
+          marginTop: 35,
+          width: 300,
           backgroundColor: "white",
-          height: 30,
-          width: 250,
-          borderRadius: 30,
+          height: 50,
+          borderRadius: 10,
+          borderBottomColor: "white",
+          borderColor: "white",
           alignContent: "center",
-          textAlign: "center",
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
         }}
         placeholder="Organization ID or Address"
         label="Email"
+        type="outlined"
         value={text}
         onChangeText={(text) => setText(text)}
       />
+
       {showLoader ? (
         <ActivityIndicator style={{ marginTop: 50 }} />
       ) : orgStatus ? (

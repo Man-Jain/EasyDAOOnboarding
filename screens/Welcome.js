@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgb(40, 51, 76)",
     alignItems: "center",
+    padding: 20,
   },
   contentContainer: {
     paddingTop: 15,
