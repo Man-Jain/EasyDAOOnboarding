@@ -12,6 +12,8 @@ import {
   ProgressBar,
   Colors,
   List,
+  Text,
+  Divider,
 } from "react-native-paper";
 import Wallet from "ethereumjs-wallet";
 import wallet from "../assets/images/wallet.png";
@@ -21,7 +23,7 @@ export default function Account({ navigation }) {
       <Headline
         style={{
           color: "white",
-          marginTop: 15,
+          marginTop: 55,
           fontSize: 20,
           textAlign: "center",
         }}
@@ -38,12 +40,105 @@ export default function Account({ navigation }) {
       >
         200$
       </Headline>
-      <Subheading
-        style={{ marginTop: 15, color: "white", textAlign: "center" }}
-      >
+      <Subheading style={{ marginTop: 5, color: "white", textAlign: "center" }}>
         0xAF...58eBB
       </Subheading>
-      <Button
+      <View style={styles.container}>
+        <List.Section>
+          <List.Item
+            titleStyle={{ color: "white" }}
+            title="Ethereum   0.5 ETH"
+            left={() => (
+              <List.Icon
+                icon={({ size, color }) => (
+                  <Image
+                    source={require("../assets/images/ethereum.png")}
+                    style={{ width: size, height: 40 }}
+                  />
+                )}
+              />
+            )}
+          />
+          <List.Item
+            title="Token   0.5 TKN"
+            titleStyle={{ color: "white" }}
+            left={() => (
+              <List.Icon
+                color="#000"
+                icon={({ size, color }) => (
+                  <Image
+                    source={require("../assets/images/Eth.png")}
+                    style={{ width: size, height: 40 }}
+                  />
+                )}
+              />
+            )}
+          />
+        </List.Section>
+        <Divider style={{ color: "white", size: 20, height: 2 }} />
+        <List.Section>
+          <List.Item
+            title="Manage Wallet"
+            titleStyle={{ color: "white" }}
+            left={() => (
+              <List.Icon
+                icon={({ size, color }) => (
+                  <Image
+                    source={require("../assets/images/wallet.png")}
+                    style={{ width: size, height: size }}
+                  />
+                )}
+              />
+            )}
+          />
+          <List.Item
+            title="Manage Organization"
+            titleStyle={{ color: "white" }}
+            left={() => (
+              <List.Icon
+                color="#000"
+                icon={({ size, color }) => (
+                  <Image
+                    source={require("../assets/images/Organ.png")}
+                    style={{ width: size, height: size }}
+                  />
+                )}
+              />
+            )}
+          />
+          <List.Item
+            title="Redeem Linkdrop"
+            titleStyle={{ color: "white" }}
+            left={() => (
+              <List.Icon
+                color="white"
+                icon={({ size, color }) => (
+                  <Image
+                    source={require("../assets/images/Linkdrop.png")}
+                    style={{ width: 30, height: size }}
+                  />
+                )}
+              />
+            )}
+          />
+          <List.Item
+            title="Buy Crypto"
+            titleStyle={{ color: "white" }}
+            left={() => (
+              <List.Icon
+                color="white"
+                icon={({ size, color }) => (
+                  <Image
+                    source={require("../assets/images/Crypto.png")}
+                    style={{ width: size, height: size }}
+                  />
+                )}
+              />
+            )}
+          />
+        </List.Section>
+      </View>
+      {/* <Button
         textAlign="left"
         icon={({ size, color }) => (
           <Image
@@ -58,7 +153,7 @@ export default function Account({ navigation }) {
           fontSize: 17,
         }}
       >
-        Ethereum <span style={{ marginLeft: 35 }}>0.5 ETH</span>
+        Ethereum <Text style={{ marginLeft: 65, color: "white" }}>0.5 ETH</Text>
       </Button>
       <Button
         textAlign="left"
@@ -75,8 +170,8 @@ export default function Account({ navigation }) {
           fontSize: 17,
         }}
       >
-        Token <span style={{ marginLeft: 40 }}>0.5 TKN</span>
-      </Button>
+        Token <Text style={{ marginLeft: 40, color: "white" }}>0.5 TKN</Text>
+      </Button> */}
       {/* <Subheading
         style={{ marginTop: 15, color: "white", textAlign: "center" }}
       >
@@ -93,7 +188,7 @@ export default function Account({ navigation }) {
         left={(props) => <List.Icon {...props} icon="folder" />}
       /> */}
 
-      <Button
+      {/* <Button
         textAlign="left"
         icon={({ size, color }) => (
           <Image
@@ -162,7 +257,7 @@ export default function Account({ navigation }) {
         color="white"
       >
         Buy Crypto
-      </Button>
+      </Button> */}
       {/* <List.Item
         title="Manage Wallet"
         right={(props) => <List.Icon {...props} icon="arrow-right" />}
