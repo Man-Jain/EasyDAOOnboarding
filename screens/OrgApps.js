@@ -46,10 +46,10 @@ export default function OrgApps({ navigation }) {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   React.useEffect(() => {
-    fetchOrgApps()
+    fetchOrgApps();
   }, []);
 
   return (
@@ -61,7 +61,7 @@ export default function OrgApps({ navigation }) {
           <Headline
             style={{
               color: "white",
-              marginTop: 75,
+              marginTop: 35,
               fontSize: 20,
               textAlign: "center",
             }}
@@ -82,7 +82,13 @@ export default function OrgApps({ navigation }) {
                     address: app.address,
                   });
                 }}
-                style={{ width: 260, alignContent: "center", marginTop: 20 }}
+                style={{
+                  width: 260,
+                  alignContent: "center",
+                  marginTop: 20,
+                  backgroundColor: "#404e6e",
+                  color: "white",
+                }}
               >
                 <Image
                   source={Voting1}
@@ -98,11 +104,14 @@ export default function OrgApps({ navigation }) {
                     marginTop: 20,
                     marginLeft: 20,
                     textTransform: "uppercase",
+                    color: "white",
                   }}
                 >
                   {app.name}
                 </Title>
-                <Paragraph style={{ marginLeft: 20, marginBottom: 20 }}>
+                <Paragraph
+                  style={{ marginLeft: 20, marginBottom: 20, color: "white" }}
+                >
                   Start voting to Proposals
                 </Paragraph>
               </Card>
@@ -111,7 +120,11 @@ export default function OrgApps({ navigation }) {
 
           <Button
             mode="contained"
-            style={{ marginTop: 50, backgroundColor: "#0099ff" }}
+            style={{
+              marginTop: 30,
+              backgroundColor: "#0099ff",
+              marginBottom: 10,
+            }}
             onPress={() => console.log("Pressed")}
             onPress={() => navigation.push("Buy")}
           >
@@ -127,6 +140,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgb(40, 51, 76)",
     alignItems: "center",
+
+    padding: 10,
   },
   contentContainer: {
     paddingTop: 15,

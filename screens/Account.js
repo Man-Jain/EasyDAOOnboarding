@@ -13,7 +13,8 @@ import {
   Colors,
   List,
 } from "react-native-paper";
-
+import Wallet from "ethereumjs-wallet";
+import wallet from "../assets/images/wallet.png";
 export default function Account({ navigation }) {
   return (
     <View style={styles.container}>
@@ -42,14 +43,47 @@ export default function Account({ navigation }) {
       >
         0xAF...58eBB
       </Subheading>
-
-      <Subheading
+      <Button
+        textAlign="left"
+        icon={({ size, color }) => (
+          <Image
+            source={require("../assets/images/ethereum.png")}
+            style={{ width: size, height: 30 }}
+          />
+        )}
+        size={50}
+        mode="text"
+        color="white"
+        labelStyle={{
+          fontSize: 17,
+        }}
+      >
+        Ethereum <span style={{ marginLeft: 35 }}>0.5 ETH</span>
+      </Button>
+      <Button
+        textAlign="left"
+        icon={({ size, color }) => (
+          <Image
+            source={require("../assets/images/Eth.png")}
+            style={{ width: size, height: 30 }}
+          />
+        )}
+        size={50}
+        mode="text"
+        color="white"
+        labelStyle={{
+          fontSize: 17,
+        }}
+      >
+        Token <span style={{ marginLeft: 40 }}>0.5 TKN</span>
+      </Button>
+      {/* <Subheading
         style={{ marginTop: 15, color: "white", textAlign: "center" }}
       >
-        0xAF...58eBB
-      </Subheading>
-
-      <List.Item
+        <Image source={wallet} />
+        Ethereum <span style={{ marginLeft: 30 }}>0.5 ETH</span>
+      </Subheading> */}
+      {/* <List.Item
         color="white"
         title=" Ether 0.5 ETH"
         left={(props) => <List.Icon {...props} icon="ethereum" />}
@@ -57,8 +91,79 @@ export default function Account({ navigation }) {
       <List.Item
         title="Token 0.5 TKN"
         left={(props) => <List.Icon {...props} icon="folder" />}
-      />
-      <List.Item
+      /> */}
+
+      <Button
+        textAlign="left"
+        icon={({ size, color }) => (
+          <Image
+            source={require("../assets/images/wallet.png")}
+            style={{ width: size, height: size }}
+          />
+        )}
+        size={50}
+        mode="text"
+        color="white"
+        labelStyle={{
+          fontSize: 17,
+        }}
+        style={{
+          backgroundColor: "transparent",
+          color: "white",
+          fontWeight: "bolder",
+        }}
+      >
+        Manage Wallet{" "}
+      </Button>
+      <Button
+        icon={({ size, color }) => (
+          <Image
+            source={require("../assets/images/Organ.png")}
+            style={{ width: size, height: size }}
+          />
+        )}
+        labelStyle={{
+          fontSize: 17,
+        }}
+        mode="text"
+        style={{ backgroundColor: "transparent", color: "white" }}
+        color="white"
+      >
+        Manage Organization{" "}
+      </Button>
+      <Button
+        icon={({ size, color }) => (
+          <Image
+            source={require("../assets/images/Linkdrop.png")}
+            style={{ width: size, height: size }}
+          />
+        )}
+        labelStyle={{
+          fontSize: 17,
+        }}
+        mode="text"
+        style={{ backgroundColor: "transparent", color: "white" }}
+        color="white"
+      >
+        Redeem Linkdrop
+      </Button>
+      <Button
+        icon={({ size, color }) => (
+          <Image
+            source={require("../assets/images/Crypto.png")}
+            style={{ width: size, height: size }}
+          />
+        )}
+        labelStyle={{
+          fontSize: 17,
+        }}
+        mode="text"
+        style={{ backgroundColor: "transparent", color: "white" }}
+        color="white"
+      >
+        Buy Crypto
+      </Button>
+      {/* <List.Item
         title="Manage Wallet"
         right={(props) => <List.Icon {...props} icon="arrow-right" />}
       />
@@ -73,7 +178,7 @@ export default function Account({ navigation }) {
       <List.Item
         title="Buy Crypto"
         right={(props) => <List.Icon {...props} icon="arrow-right" />}
-      />
+      /> */}
     </View>
   );
 }
@@ -82,7 +187,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "rgb(40, 51, 76)",
-    alignItems: "center",
     color: "white",
   },
   contentContainer: {
@@ -106,19 +210,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: "flex-start",
     marginTop: 1,
-  },
-  button: {
-    backgroundColor: "blue",
-    padding: 20,
-    borderRadius: 5,
-    width: 130,
-    marginLeft: 120,
-    borderRadius: 25,
-    marginBottom: 25,
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "#fff",
-    textAlign: "center",
   },
 });

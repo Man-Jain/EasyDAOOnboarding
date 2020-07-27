@@ -1,4 +1,4 @@
-import './global';
+import "./global";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
@@ -27,9 +27,9 @@ import TokenLink from "./screens/TokenLink";
 import Buy from "./screens/Buy";
 import Voting from "./screens/Voting";
 import BottomTab from "./navigation/BottomTab";
-import TransaktScreen from './screens/TransaktScreen';
+import TransaktScreen from "./screens/TransaktScreen";
 import { Magic } from "@magic-sdk/react-native";
-export const Web3 = require('web3');
+export const Web3 = require("web3");
 
 export const m = new Magic("pk_test_128736FEB952AFC9", {
   network: "rinkeby", // Supports "rinkeby", "ropsten", "kovan"
@@ -45,14 +45,46 @@ export default function App() {
           <Stack.Navigator>
             {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
 
-            <Stack.Screen options={{ headerShown: false }} name="Welcome" component={Welcome} />
-            <Stack.Screen options={{ headerShown: false }} name="Email" component={Email} />
-            <Stack.Screen options={{ headerShown: false }} name="Organization" component={Organization} />
-            <Stack.Screen options={{ headerShown: false }} name="TokenLink" component={TokenLink} />
-            <Stack.Screen options={{ headerShown: false }} name="Buy" component={Buy} />
-            <Stack.Screen options={{ headerShown: false }} name="BottomTab" component={BottomTab} />
-            <Stack.Screen options={{headerShown: true, headerTitle: 'Votes'}} name="Voting" component={Voting} />
-            <Stack.Screen options={{headerShown: true, headerTitle: 'Buy Crypto'}} name="TransaktScreen" component={TransaktScreen} />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Welcome"
+              component={Welcome}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Email"
+              component={Email}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Organization"
+              component={Organization}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="TokenLink"
+              component={TokenLink}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Buy"
+              component={Buy}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="BottomTab"
+              component={BottomTab}
+            />
+            <Stack.Screen
+              options={{ headerShown: true, headerTitle: "Votes" }}
+              name="Voting"
+              component={Voting}
+            />
+            <Stack.Screen
+              options={{ headerShown: true, headerTitle: "Buy Crypto" }}
+              name="TransaktScreen"
+              component={TransaktScreen}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, View, StyleSheet, TextInput } from "react-native";
+import { Image, View, StyleSheet, TextInput, ScrollView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -36,74 +36,100 @@ export default function Choice({ navigation, route }) {
         console.log(err);
       });
     console.log("votes", votes);
-  }
+  };
 
   React.useEffect(() => {
-    fetchVotes() 
+    fetchVotes();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Headline
-        style={{
-          color: "white",
-          marginTop: 15,
-          fontSize: 20,
-          textAlign: "center",
-        }}
-      >
-        Voting{" "}
-      </Headline>
-      {votes.length < 0 ? (
-        <ActivityIndicator />
-      ) : (
-        votes.map((vote, key) => (
-          <Card style={{ width: 260, alignContent: "center", marginTop: 20 }}>
-            <Button icon="thumb-up" mode="contained">
-              Voting
-            </Button>
-            <Headline
+      <ScrollView>
+        <Headline
+          style={{
+            color: "white",
+            marginTop: 15,
+            fontSize: 20,
+            textAlign: "center",
+          }}
+        >
+          Voting{" "}
+        </Headline>
+        {votes.length < 0 ? (
+          <ActivityIndicator />
+        ) : (
+          votes.map((vote, key) => (
+            <Card
               style={{
-                marginTop: 15,
-                fontSize: 20,
-                textAlign: "center",
+                width: 260,
+                alignContent: "center",
+                marginTop: 20,
+                marginBottom: 20,
+                backgroundColor: "#404e6e",
               }}
             >
-              {"#"}{key} {vote.metadata}
-            </Headline>
-            <Headline
-              style={{
-                marginTop: 10,
-                fontSize: 20,
-                textAlign: "center",
-              }}
-            >
-              Yes{"  - "} {(vote.yea) / 10 ** 18}
-            </Headline>
-            <ProgressBar progress={0.2} color={Colors.red800} />
-            <Headline
-              style={{
-                marginTop: 10,
-                fontSize: 20,
-                textAlign: "center",
-              }}
-            >
-              No{" - "} {(vote.nay) / 10 ** 18}
-            </Headline>
-            <ProgressBar progress={0.5} color={Colors.red800} />
-            <Headline
-              style={{
-                color: "Red",
-                marginTop: 10,
-                fontSize: 20,
-                textAlign: "center",
-              }}
-            >
-              Reject
-            </Headline>
-          </Card>
-        ))
-      )}
+              <Button
+                icon="thumb-up"
+                mode="contained"
+                style={{ backgroundColor: "rgb(50, 51, 96)" }}
+              >
+                Voting
+              </Button>
+              <Headline
+                style={{
+                  marginTop: 15,
+                  fontSize: 20,
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
+                {"#"}
+                {key} {vote.metadata}
+              </Headline>
+              <Headline
+                style={{
+                  marginTop: 10,
+                  fontSize: 20,
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
+                Yes{"  - "} {vote.yea / 10 ** 18}
+              </Headline>
+              <ProgressBar
+                progress={0.2}
+                color={Colors.blue400}
+                style={{ marginLeft: 10, marginRight: 10 }}
+              />
+              <Headline
+                style={{
+                  marginTop: 10,
+                  fontSize: 20,
+                  textAlign: "center",
+                  color: "white",
+                }}
+              >
+                No{" - "} {vote.nay / 10 ** 18}
+              </Headline>
+              <ProgressBar
+                progress={0.5}
+                color={Colors.blue400}
+                style={{ marginLeft: 10, marginRight: 10 }}
+              />
+              <Headline
+                style={{
+                  color: "white",
+                  marginTop: 10,
+                  fontSize: 15,
+                  textAlign: "center",
+                }}
+              >
+                Reject
+              </Headline>
+            </Card>
+          ))
+        )}
+      </ScrollView>
     </View>
   );
 }
