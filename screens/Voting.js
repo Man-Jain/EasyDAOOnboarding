@@ -78,7 +78,7 @@ export default function Choice({ navigation, route }) {
                 textAlign: "center",
               }}
             >
-              Yes{"  - "} {vote.yea}
+              Yes{"  - "} {(vote.yea) / 10 ** 18}
             </Headline>
             <ProgressBar progress={0.2} color={Colors.red800} />
             <Headline
@@ -88,7 +88,7 @@ export default function Choice({ navigation, route }) {
                 textAlign: "center",
               }}
             >
-              No{" - "} {vote.nay}
+              No{" - "} {(vote.nay) / 10 ** 18}
             </Headline>
             <ProgressBar progress={0.5} color={Colors.red800} />
             <Headline

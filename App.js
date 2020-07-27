@@ -51,8 +51,8 @@ export default function App() {
             <Stack.Screen options={{ headerShown: false }} name="TokenLink" component={TokenLink} />
             <Stack.Screen options={{ headerShown: false }} name="Buy" component={Buy} />
             <Stack.Screen options={{ headerShown: false }} name="BottomTab" component={BottomTab} />
-            <Stack.Screen screenOptions={{headerShown: true, headerTitle: 'Votes'}} name="Voting" component={Voting} />
-            <Stack.Screen screenOptions={{headerShown: true, headerTitle: 'Buy Crypto'}} name="TransaktScreen" component={TransaktScreen} />
+            <Stack.Screen options={{headerShown: true, headerTitle: 'Votes'}} name="Voting" component={Voting} />
+            <Stack.Screen options={{headerShown: true, headerTitle: 'Buy Crypto'}} name="TransaktScreen" component={TransaktScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>

@@ -113,7 +113,7 @@ export default function OrgApps({ navigation }) {
             mode="contained"
             style={{ marginTop: 50, backgroundColor: "#0099ff" }}
             onPress={() => console.log("Pressed")}
-            onPress={() => navigation.push("Organization")}
+            onPress={() => navigation.push("Buy")}
           >
             Buy Now
           </Button>

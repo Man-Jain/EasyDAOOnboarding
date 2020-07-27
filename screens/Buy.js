@@ -15,7 +15,7 @@ export default function Buy({ navigation }) {
   React.useEffect(() => {
     try {
       AsyncStorage.getItem('user_ethaddress').then((value) => {
-        console.log('value', e)
+        console.log('value', value)
         setUserAddress(value)
       })
     } catch(e) {
@@ -48,17 +48,21 @@ export default function Buy({ navigation }) {
         If you'd like you can skip this step for now and do it later
       </Subheading>
       <Button
-        mode="outlined"
-        style={{ marginTop: 50, borderColor: "white" }}
+        mode="contained"
+        style={{ marginTop: 50, backgroundColor: "#0099ff", color: "white" }}
         onPress={() => console.log("Pressed")}
         onPress={() => navigation.push("TransaktScreen")}
-        color="white"
       >
         Buy Now
       </Button>
+      <Subheading
+        style={{ marginTop: 20, color: "white", textAlign: "center" }}
+      >
+        OR
+      </Subheading>
       <Button
-        mode="outlined"
-        style={{ marginTop: 20, borderColor: "white" }}
+        mode="text"
+        style={{ marginTop: 10}}
         onPress={() => console.log("Pressed")}
         onPress={() => navigation.push("BottomTab")}
         color="white"

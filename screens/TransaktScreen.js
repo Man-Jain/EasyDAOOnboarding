@@ -15,13 +15,13 @@ export default function TransaktScreen({ navigation }) {
     navigation.setParams({ isHeaderVisible: true });
     try {
       AsyncStorage.getItem('user_ethaddress').then((value) => {
-        console.log('value', e)
+        console.log('value', value)
         setUserAddress(value)
       })
     } catch(e) {
       console.log('e', e)
     }
-  }, userAddress)
+  }, [userAddress])
 
   return (
     <View style={styles.container}>
@@ -31,7 +31,7 @@ export default function TransaktScreen({ navigation }) {
             <iframe
             width="100%"
             height="100%"
-            src="https://global.transak.com?apiKey=32c23eaa-49e4-44cf-85ca-4fc08ae15c8f&walletAddress=${userAddress}"
+            src="https://staging-global.transak.com?apiKey=d229952b-3774-4488-9e23-c952caf00ec4&walletAddress=${userAddress}"
             frameborder="0"
           ></iframe>`,
         }}

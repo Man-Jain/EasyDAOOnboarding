@@ -78,7 +78,7 @@ export default function Email({ navigation }) {
           onChangeText={(text) => setText(text)}
         />
         {showLoader ? (
-          <ActivityIndicator />
+          <ActivityIndicator style={{ marginTop: 50}} />
         ) : (
           <Button
             mode="contained"
