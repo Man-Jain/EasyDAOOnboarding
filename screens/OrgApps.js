@@ -9,17 +9,23 @@ import {
   Button,
   Card,
   Title,
+  ActivityIndicator,
 } from "react-native-paper";
 import Voting1 from "../assets/images/Voting1.png";
 import Tokens from "../assets/images/Tokens.png";
 import { WebView } from "react-native-webview";
 import AsyncStorage from "@react-native-community/async-storage";
 import { connect } from "@aragon/connect";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Organization from "./Organization";
+import TokenLink from "./TokenLink";
+
+const Tab = createBottomTabNavigator();
 
 export default function OrgApps({ navigation }) {
   const [orgApps, setOrgApps] = React.useState([]);
 
-  React.useEffect(() => {
+  const fetchOrgApps = async () => {
     try {
       let orgAddress;
       AsyncStorage.getItem("organization_address").then(async (value) => {
@@ -40,64 +46,79 @@ export default function OrgApps({ navigation }) {
     } catch (e) {
       console.log(e);
     }
-  }, orgApps);
+  }
+
+  React.useEffect(() => {
+    fetchOrgApps()
+  }, []);
 
   return (
     <View style={styles.container}>
-      <ScrollView showsHorizontalScrollIndicator={false}>
-        <Headline
-          style={{
-            color: "white",
-            marginTop: 75,
-            fontSize: 20,
-            textAlign: "center",
-          }}
-        >
-          testaragon.aragonid.eth
-        </Headline>
-        <Subheading
-          style={{ marginTop: 15, color: "white", textAlign: "center" }}
-        >
-          What would you like to do?
-        </Subheading>
+      {orgApps.length < 0 ? (
+        <ActivityIndicator />
+      ) : (
+        <ScrollView showsHorizontalScrollIndicator={false}>
+          <Headline
+            style={{
+              color: "white",
+              marginTop: 75,
+              fontSize: 20,
+              textAlign: "center",
+            }}
+          >
+            testaragon.aragonid.eth
+          </Headline>
+          <Subheading
+            style={{ marginTop: 15, color: "white", textAlign: "center" }}
+          >
+            What would you like to do?
+          </Subheading>
 
-        {orgApps.map((app) =>
-          app.name ? (
-            <Card style={{ width: 260, alignContent: "center", marginTop: 20 }}>
-              <Image
-                source={Voting1}
-                style={{
-                  width: 130,
-                  height: 130,
-                  marginLeft: 70,
+          {orgApps.map((app) =>
+            app.name ? (
+              <Card
+                onPress={() => {
+                  navigation.push("Voting", {
+                    address: app.address,
+                  });
                 }}
-              />
-
-              <Title
-                style={{
-                  marginTop: 20,
-                  marginLeft: 20,
-                  textTransform: "uppercase",
-                }}
+                style={{ width: 260, alignContent: "center", marginTop: 20 }}
               >
-                {app.name}
-              </Title>
-              <Paragraph style={{ marginLeft: 20, marginBottom: 20 }}>
-                Start voting to Proposals
-              </Paragraph>
-            </Card>
-          ) : null
-        )}
+                <Image
+                  source={Voting1}
+                  style={{
+                    width: 130,
+                    height: 130,
+                    marginLeft: 70,
+                  }}
+                />
 
-        <Button
-          mode="contained"
-          style={{ marginTop: 50, backgroundColor: "#0099ff" }}
-          onPress={() => console.log("Pressed")}
-          onPress={() => navigation.push("Organization")}
-        >
-          Buy Now
-        </Button>
-      </ScrollView>
+                <Title
+                  style={{
+                    marginTop: 20,
+                    marginLeft: 20,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {app.name}
+                </Title>
+                <Paragraph style={{ marginLeft: 20, marginBottom: 20 }}>
+                  Start voting to Proposals
+                </Paragraph>
+              </Card>
+            ) : null
+          )}
+
+          <Button
+            mode="contained"
+            style={{ marginTop: 50, backgroundColor: "#0099ff" }}
+            onPress={() => console.log("Pressed")}
+            onPress={() => navigation.push("Organization")}
+          >
+            Buy Now
+          </Button>
+        </ScrollView>
+      )}
     </View>
   );
 }

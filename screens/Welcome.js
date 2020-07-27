@@ -13,7 +13,7 @@ export default function Welcome({ navigation }) {
       AsyncStorage.getItem("organization_address").then((value) => {
         console.log("value", value);
         if (value !== null) {
-          navigation.replace("OrgApps");
+          navigation.replace("BottomTab");
         } else {
           try {
             AsyncStorage.getItem("user_email").then((value) => {

@@ -14,6 +14,9 @@ import Voting1 from "../assets/images/Voting1.png";
 import Tokens from "../assets/images/Tokens.png";
 import { Organization, connect } from "@aragon/connect";
 import { WebView } from "react-native-webview";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 export default function Choice({ navigation }) {
   React.useEffect(() => {

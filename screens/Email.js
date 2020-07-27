@@ -54,7 +54,7 @@ export default function Email({ navigation }) {
   return (
     <View style={styles.container}>
       <m.Relayer />
-      <View>
+      <View style={styles.container}>
         <Image
           source={EmailWhite}
           style={{ width: 100, height: 130, marginTop: 125 }}
@@ -98,6 +98,8 @@ export default function Email({ navigation }) {
     </View>
   );
 }
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

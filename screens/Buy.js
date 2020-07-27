@@ -60,7 +60,7 @@ export default function Buy({ navigation }) {
         mode="outlined"
         style={{ marginTop: 20, borderColor: "white" }}
         onPress={() => console.log("Pressed")}
-        onPress={() => navigation.push("OrgApps")}
+        onPress={() => navigation.push("BottomTab")}
         color="white"
       >
         Go To Organization

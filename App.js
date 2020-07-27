@@ -25,7 +25,8 @@ import Email from "./screens/Email";
 import Organization from "./screens/Organization";
 import TokenLink from "./screens/TokenLink";
 import Buy from "./screens/Buy";
-import OrgApps from "./screens/OrgApps";
+import Voting from "./screens/Voting";
+import BottomTab from "./navigation/BottomTab";
 import TransaktScreen from './screens/TransaktScreen';
 import { Magic } from "@magic-sdk/react-native";
 export const Web3 = require('web3');
@@ -49,7 +50,8 @@ export default function App() {
             <Stack.Screen options={{ headerShown: false }} name="Organization" component={Organization} />
             <Stack.Screen options={{ headerShown: false }} name="TokenLink" component={TokenLink} />
             <Stack.Screen options={{ headerShown: false }} name="Buy" component={Buy} />
-            <Stack.Screen options={{ headerShown: false }} name="OrgApps" component={OrgApps} />
+            <Stack.Screen options={{ headerShown: false }} name="BottomTab" component={BottomTab} />
+            <Stack.Screen screenOptions={{headerShown: true, headerTitle: 'Votes'}} name="Voting" component={Voting} />
             <Stack.Screen screenOptions={{headerShown: true, headerTitle: 'Buy Crypto'}} name="TransaktScreen" component={TransaktScreen} />
           </Stack.Navigator>
         </NavigationContainer>
