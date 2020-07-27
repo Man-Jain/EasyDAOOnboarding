@@ -16,7 +16,7 @@ Being a Mobile App it is easier to access from anywhere increasing DAO usage and
 
 ## Application APK - 
 
-https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40man-jain/Onboarding-dao-8c6f9adb844e456598a045878945852f-signed.apk
+https://github.com/Man-Jain/EasyDAOOnboarding/releases/download/1/Onboarding-dao-8c6f9adb844e456598a045878945852f-signed.apk
 
 ## Deploy Instructions - 
 
