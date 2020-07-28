@@ -44,7 +44,7 @@ expo start
 
 ## Screenshots
 
-https://postimg.cc/gallery/9qXPTZN
+https://www.imageupload.net/album/iDjs/?sort=title_asc&page=1
 
 ## Video Demos
 
