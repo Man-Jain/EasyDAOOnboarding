@@ -30,7 +30,7 @@ import BottomTab from "./navigation/BottomTab";
 import TransaktScreen from "./screens/TransaktScreen";
 import { Magic } from "@magic-sdk/react-native";
 export const Web3 = require("web3");
-
+// Web3 Requied
 export const m = new Magic("pk_test_128736FEB952AFC9", {
   network: "rinkeby", // Supports "rinkeby", "ropsten", "kovan"
 }); // ✨
@@ -92,7 +92,7 @@ export default function App() {
     </View>
   );
 }
-
+// Css Work
 const styles = StyleSheet.create({
   container: {
     flex: 1,
