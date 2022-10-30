@@ -274,21 +274,6 @@ export default function Account({ navigation }) {
       >
         Token <Text style={{ marginLeft: 40, color: "white" }}>0.5 TKN</Text>
       </Button> */}
-      {/* <Subheading
-        style={{ marginTop: 15, color: "white", textAlign: "center" }}
-      >
-        <Image source={wallet} />
-        Ethereum <span style={{ marginLeft: 30 }}>0.5 ETH</span>
-      </Subheading> */}
-      {/* <List.Item
-        color="white"
-        title=" Ether 0.5 ETH"
-        left={(props) => <List.Icon {...props} icon="ethereum" />}
-      />
-      <List.Item
-        title="Token 0.5 TKN"
-        left={(props) => <List.Icon {...props} icon="folder" />}
-      /> */}
 
       {/* <Button
         textAlign="left"
