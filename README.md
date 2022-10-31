@@ -40,7 +40,7 @@ expo start
 *Note* 
 
 - For Demostration Purposes only Voting App Works in the Apps Section. Rest are WIP
-- Test VISA Card for Buying Crytpo - VISA | 4111111111111111 | 10/23 | 123
+- Test VISA Card for Buying Crypto - VISA | 4111111111111111 | 10/23 | 123
 
 ## Screenshots
 
