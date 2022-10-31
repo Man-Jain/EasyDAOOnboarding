@@ -46,7 +46,6 @@ export default function Welcome({ navigation }) {
           color: "white",
           marginTop: 45,
           fontSize: 17,
-
           alignContent: "center",
           textAlign: "center",
           width: 270,
@@ -65,19 +64,24 @@ export default function Welcome({ navigation }) {
     </View>
   );
 }
+
+// Stylesheet for buy.js
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgb(40, 51, 76)",
+    backgroundColor: "#28374C",
     alignItems: "center",
     padding: 20,
   },
+  
   contentContainer: {
     paddingTop: 15,
   },
+  
   optionIconContainer: {
     marginRight: 12,
   },
+  
   option: {
     backgroundColor: "#fdfdfd",
     paddingHorizontal: 15,
@@ -86,14 +90,17 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
     borderColor: "#ededed",
   },
+  
   lastOption: {
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  
   optionText: {
     fontSize: 15,
     alignSelf: "flex-start",
     marginTop: 1,
   },
+  
   button: {
     backgroundColor: "blue",
     padding: 20,
@@ -103,6 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginBottom: 25,
   },
+  
   buttonText: {
     fontSize: 20,
     color: "#fff",
